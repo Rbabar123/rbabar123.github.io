@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Elements
   var envelope = document.getElementById("envelope");
   var btn_open = document.getElementById("open");
   var btn_reset = document.getElementById("reset");
@@ -6,12 +7,24 @@ document.addEventListener("DOMContentLoaded", function () {
   let audio = new Audio("love_song.mp3");
   var isOpen = false;  // Variable to track the envelope state
   var tulipInterval;   // Variable to store the tulip animation interval
+  var tulipContainer = document.getElementById("tulip-container");
 
-  // Create a container for the tulips
-  const tulipContainer = document.createElement("div");
-  tulipContainer.id = "tulip-container";
-  document.body.appendChild(tulipContainer);
+  // Visitor Counter using localStorage
+  var visitCount = localStorage.getItem('visitCount');
+  if (!visitCount) {
+      visitCount = 1;
+  } else {
+      visitCount = parseInt(visitCount) + 1;
+  }
+  localStorage.setItem('visitCount', visitCount);
+  
+  // Display visit count in an element with ID 'visit-counter'
+  var visitCounterElement = document.getElementById("visit-counter");
+  if (visitCounterElement) {
+      visitCounterElement.textContent = `Number of Visits: ${visitCount}`;
+  }
 
+  // Event listeners
   envelope.addEventListener("click", toggleEnvelope);
   btn_open.addEventListener("click", toggleEnvelope);
   btn_reset.addEventListener("click", closeEnvelope);
@@ -59,6 +72,10 @@ document.addEventListener("DOMContentLoaded", function () {
       tulip.classList.add('tulip');
       tulip.style.backgroundImage = "url('tulip.png')"; // Set tulip image path
 
+      // Set tulip size
+      tulip.style.width = "50px";  // Adjust the width as needed
+      tulip.style.height = "50px"; // Adjust the height as needed
+
       // Set random horizontal position
       tulip.style.left = Math.random() * 100 + 'vw';
 
@@ -68,6 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
       tulipContainer.appendChild(tulip);
 
       // Remove the tulip after animation ends
-      tulip.addEventListener("animationend", () => tulip.remove());
+      setTimeout(() => tulip.remove(), 5000);
   }
 });
