@@ -86,5 +86,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Remove the tulip after animation ends
       setTimeout(() => tulip.remove(), 5000);
+    function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.textContent = '💕';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+    heart.style.fontSize = `${Math.random() * 10 + 20}px`; // Random heart size
+
+    document.getElementById('heart-container').appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+// Use this to start falling hearts at intervals
+setInterval(createHeart, 500);
+
   }
 });
