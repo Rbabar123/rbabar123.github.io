@@ -60,9 +60,9 @@
 
         .tulip {
             position: absolute;
-            width: 30px; /* Adjust size as needed */
-            height: 30px;
-            background-image: url('tulip.png'); /* Replace with your tulip image path */
+            width: 40px; /* Adjusted size */
+            height: 40px;
+            background-image: url('tulip.png');
             background-size: cover;
             animation: fall linear infinite;
         }
@@ -90,7 +90,7 @@
             <div class="letter">
                 <p class="words line1">Hello nics,</p>
                 <p class="words line2">I know sometimes life can be tough,</p>
-                <p class="words line3">but I"ll always be here for you.</p>
+                <p class="words line3">but I'll always be here for you.</p>
                 <p class="words line4">I love you.❤️🥰</p>
             </div>
             <div class="hearts">
@@ -115,9 +115,15 @@
             var btn_open = document.getElementById("open");
             var btn_reset = document.getElementById("reset");
             var heading = document.querySelector(".valentine");
-            let audio = new Audio("love_song.mp3"); // Make sure love_song.mp3 is in the same directory
-            var isOpen = false;  // Variable to track the envelope state
-            var tulipInterval;   // Variable to store the tulip animation interval
+            let audio = new Audio("love_song.mp3");
+            var isOpen = false;
+            var tulipInterval;
+
+            // Visit Counter
+            let visitCount = localStorage.getItem('visitCount') || 0;
+            visitCount++;
+            localStorage.setItem('visitCount', visitCount);
+            document.getElementById('visit-counter').textContent = `Number of Visits: ${visitCount}`;
 
             envelope.addEventListener("click", toggleEnvelope);
             btn_open.addEventListener("click", toggleEnvelope);
@@ -126,7 +132,6 @@
             function toggleEnvelope() {
                 if (!isOpen) {
                     audio.play();
-                    // If the envelope is not open, open it
                     envelope.classList.add("open");
                     envelope.classList.remove("close");
                     heading.style.display = "block";
@@ -144,19 +149,18 @@
 
                     isOpen = true;
                 } else {
-                    // If the envelope is open, close it
                     closeEnvelope();
                 }
             }
 
             function closeEnvelope() {
-                // Only close the envelope if it is open
                 if (isOpen) {
                     audio.pause();
+                    audio.currentTime = 0;  // Reset audio
                     envelope.classList.remove("open");
                     envelope.classList.add("close");
                     heading.style.display = "none";
-                    clearInterval(tulipInterval); // Stop tulip animation
+                    clearInterval(tulipInterval);
                     isOpen = false;
                 }
             }
@@ -164,20 +168,15 @@
             function createTulip() {
                 const tulip = document.createElement('div');
                 tulip.classList.add('tulip');
-
-                // Set random horizontal position
                 tulip.style.left = Math.random() * 100 + 'vw';
-
-                // Set random animation duration
                 tulip.style.animationDuration = Math.random() * 3 + 2 + 's';
+                tulip.style.width = tulip.style.height = `${Math.random() * 20 + 30}px`;  // Random tulip size
 
                 document.getElementById('tulip-container').appendChild(tulip);
 
-                // Remove the tulip after animation ends
                 setTimeout(() => tulip.remove(), 5000);
             }
         });
     </script>
 </body>
 </html>
-
