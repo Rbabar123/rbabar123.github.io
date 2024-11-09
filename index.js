@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         heading.style.display = "block";
         const jsConfetti = new JSConfetti()
         jsConfetti.addConfetti({
-            emojis: ['❤️'],
+            emojis: ['❤️' '🌷'],
             emojiSize: 40,
             confettiNumber: 200,
           })
