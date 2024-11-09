@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -29,9 +29,153 @@
             </div>
         </div>
         <div class="reset">
-            <button id="open">OPEN IT</button>
+            <button id="open">OPEN IT</button> 
+
             <button id="reset">RESET</button>
         </div>
         <script src="index.js"></script>
     </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>For my babi nics.</title>
+    <link href="index.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <style>
+        /* Add styles for the tulip animation */
+        #tulip-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tulip {
+            position: absolute;
+            width: 30px; /* Adjust size as needed */
+            height: 30px;
+            background-image: url('tulip.png'); /* Replace with your tulip image path */
+            background-size: cover;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="valentine">I love you always in all ways.😍🌷!</h1>
+    <div class="envelope-wrapper">
+        <div id="envelope" class="close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+                <p class="words line1">Hello there,</p>
+                <p class="words line2">I know sometimes life can be tough.</p>
+                <p class="words line3">but i'm always here for you,</p>
+                <p class="words line4">I love you.❤️🥰</p>
+            </div>
+            <div class="hearts">
+                <div class="heart a1"></div>
+                <div class="heart a2"></div>
+                <div class="heart a3"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="reset">
+        <button id="open">OPEN</button>
+        <button id="reset">RESET</button>
+    </div>
+
+    <!-- Container for falling tulips -->
+    <div id="tulip-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var envelope = document.getElementById("envelope");
+            var btn_open = document.getElementById("open");
+            var btn_reset = document.getElementById("reset");
+            var heading = document.querySelector(".valentine");
+            let audio = new Audio("love_song.mp3"); // Make sure love_song.mp3 is in the same directory
+            var isOpen = false;  // Variable to track the envelope state
+            var tulipInterval;   // Variable to store the tulip animation interval
+
+            envelope.addEventListener("click", toggleEnvelope);
+            btn_open.addEventListener("click", toggleEnvelope);
+            btn_reset.addEventListener("click", closeEnvelope);
+
+            function toggleEnvelope() {
+                if (!isOpen) {
+                    audio.play();
+                    // If the envelope is not open, open it
+                    envelope.classList.add("open");
+                    envelope.classList.remove("close");
+                    heading.style.display = "block";
+                    
+                    // Add confetti effect
+                    const jsConfetti = new JSConfetti();
+                    jsConfetti.addConfetti({
+                        emojis: ['❤️'],
+                        emojiSize: 40,
+                        confettiNumber: 200,
+                    });
+
+                    // Start falling tulips
+                    tulipInterval = setInterval(createTulip, 300);
+
+                    isOpen = true;
+                } else {
+                    // If the envelope is open, close it
+                    closeEnvelope();
+                }
+            }
+
+            function closeEnvelope() {
+                // Only close the envelope if it is open
+                if (isOpen) {
+                    audio.pause();
+                    envelope.classList.remove("open");
+                    envelope.classList.add("close");
+                    heading.style.display = "none";
+                    clearInterval(tulipInterval); // Stop tulip animation
+                    isOpen = false;
+                }
+            }
+
+            function createTulip() {
+                const tulip = document.createElement('div');
+                tulip.classList.add('tulip');
+
+                // Set random horizontal position
+                tulip.style.left = Math.random() * 100 + 'vw';
+
+                // Set random animation duration
+                tulip.style.animationDuration = Math.random() * 3 + 2 + 's';
+
+                document.getElementById('tulip-container').appendChild(tulip);
+
+                // Remove the tulip after animation ends
+                setTimeout(() => tulip.remove(), 5000);
+            }
+        });
+    </script>
+</body>
 </html>
+
