@@ -4,36 +4,14 @@
   box-sizing: border-box;
   text-align: center;
 }
-#heart-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
+
+body {
+  width: 100%;
+  height: auto;
+  background: url(./bg.jpeg) no-repeat center center/cover;
 }
 
-.heart {
-    position: absolute;
-    font-size: 30px;
-    color: pink;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-#tulip-container {
+#heart-container, #tulip-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,32 +19,45 @@
   height: 100%;
   pointer-events: none;
   overflow: hidden;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  font-size: 30px;
+  color: pink;
+  animation: fallHearts linear infinite;
+}
+
+@keyframes fallHearts {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 .tulip {
   position: absolute;
-  width: 30px; /* Adjust size as needed */
+  width: 30px;
   height: 30px;
-  background-image: url('tulip.png'); /* Tulip image path corrected */
+  background-image: url('tulip.png');
   background-size: cover;
-  animation: fall linear infinite;
+  animation: fallTulips linear infinite;
 }
 
-@keyframes fall {
+@keyframes fallTulips {
   0% {
-      transform: translateY(-100px) rotate(0deg);
-      opacity: 1;
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
   }
   100% {
-      transform: translateY(100vh) rotate(360deg);
-      opacity: 0;
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
   }
-}
-
-body {
-  width: 100%;
-  height: auto;
-  background: url(./bg.jpeg) no-repeat center center/cover;
 }
 
 .envelope-wrapper {
@@ -80,8 +71,7 @@ body {
   width: 280px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-left: auto; 
-  margin-right: auto; 
+  margin: 0 auto;
   top: 50%;
   background-color: #f65b55;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.437);
@@ -120,17 +110,7 @@ body {
   top: 5%;
   border-radius: 10px;
   box-shadow: 0 2px 26px rgba(0, 0, 0, .12);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.letter:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin: 0 auto;
 }
 
 .words {
@@ -143,55 +123,33 @@ body {
   color: white;
 }
 
-.line1 {
-  top: 15%;
-}
-.line2 {
-  top: 30%;
-}
-.line3 {
-  top: 50%;
-}
-.line4 {
-  top: 65%;
-}
+.line1 { top: 15%; }
+.line2 { top: 30%; }
+.line3 { top: 50%; }
+.line4 { top: 65%; }
 
 .open .flap {
-  transform: rotatex(180deg);
+  transform: rotateX(180deg);
   transition: transform 0.4s ease, z-index 0.6s;
   z-index: 1;
 }
 
 .close .flap {
-  transform: rotatex(0deg);
+  transform: rotateX(0deg);
   transition: transform 0.4s 0.6s ease, z-index 1s;
   z-index: 5;
 }
 
 .open .letter {
-  transform: translatey(-80px);
+  transform: translateY(-80px);
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
   z-index: 2;
 }
 
 .close .letter {
-  transform: translatey(0deg);
+  transform: translateY(0deg);
   transition: transform 0.4s ease, z-index 1s;
   z-index: 1;
-}
-
-.hearts {
-  position: absolute;
-  top: 90px;
-  left: 0;
-  right: 0;
-  z-index: 2;
-}
-
-.heart {
-  position: absolute;
-  bottom: 0;
-  right: 10%;
 }
 
 .heart:before, .heart:after {
@@ -211,58 +169,6 @@ body {
   left: 0;
   transform: rotate(45deg);
   transform-origin: 100% 100%;
-}
-
-.close .heart {
-  opacity: 0;
-  animation: none;
-}
-
-.a1 {
-  left: 20%;
-  transform: scale(0.6);
-  opacity: 1;
-  animation: slideUp 4s linear 1, sideSway 2s  ease-in-out 4 alternate;
-  animation-fill-mode: forwards;
-  animation-delay: 0.7s;
-}
-.a2 {
-  left: 55%;
-  transform: scale(1);
-  opacity: 1;
-  animation: slideUp 5s linear 1, sideSway 4s  ease-in-out 2 alternate;
-  animation-fill-mode: forwards;
-  animation-delay: 0.7s;
-}
-.a3 {
-  left: 10%;
-  transform: scale(0.8);
-  opacity: 1;
-  animation: slideUp 7s linear 1, sideSway 2s  ease-in-out 6 alternate;
-  animation-fill-mode: forwards;
-  animation-delay: 0.7s;
-}
-
-@keyframes slideUp {
-  0% {
-     top: 0;
-  }
-  100% {
-      top: -600px;
-  }
-}
-
-@keyframes sideSway {
-  0% {
-      margin-left: 0px;
-  }
-  100% {
-      margin-left: 50px;
-  }
-}
-
-.reset {
-  margin-top: 50px;
 }
 
 .reset button {
@@ -292,19 +198,11 @@ body {
 }
 
 @media (max-width: 600px) {
-  body {
-      height: 100vh;
-      background: url(./bg.jpeg) no-repeat center center/cover;
-  }
-
-  .valentine {
-      font-size: 35px; 
-    }
-
-    .reset button {
-      margin: 10px;
-      font-size: 15px;
-      padding: 12px;
-      min-width: 120px;
+  .valentine { font-size: 35px; }
+  .reset button {
+    margin: 10px;
+    font-size: 15px;
+    padding: 12px;
+    min-width: 120px;
   }
 }
