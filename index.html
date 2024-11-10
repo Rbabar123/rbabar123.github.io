@@ -46,8 +46,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <style>
-        /* Add styles for the tulip animation */
-        #tulip-container {
+        /* Add styles for the tulip and heart animation */
+        #tulip-container, #heart-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -58,13 +58,21 @@
             z-index: 1;
         }
 
-        .tulip {
+        .tulip, .heart {
             position: absolute;
-            width: 40px; /* Adjusted size */
-            height: 40px;
-            background-image: url('tulip.png');
-            background-size: cover;
             animation: fall linear infinite;
+        }
+
+        .tulip {
+            width: 40px;
+            height: 40px;
+            background-image: url('tulip.png'); /* Replace with your tulip image path */
+            background-size: cover;
+        }
+
+        .heart {
+            font-size: 30px;
+            color: pink;
         }
 
         @keyframes fall {
@@ -81,8 +89,6 @@
 </head>
 <body>
     <div id="visit-counter"></div>
-<!-- Container for falling hearts -->
-<div id="heart-container"></div>
 
     <h1 class="valentine">I love you always in all ways.😍🌷!</h1>
     <div class="envelope-wrapper">
@@ -108,8 +114,9 @@
         <button id="reset">RESET</button>
     </div>
 
-    <!-- Container for falling tulips -->
+    <!-- Containers for falling tulips and hearts -->
     <div id="tulip-container"></div>
+    <div id="heart-container"></div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -119,13 +126,13 @@
             var heading = document.querySelector(".valentine");
             let audio = new Audio("love_song.mp3");
             var isOpen = false;
-            var tulipInterval;
+            var tulipInterval, heartInterval;
 
             // Visit Counter
             let visitCount = localStorage.getItem('visitCount') || 0;
             visitCount++;
             localStorage.setItem('visitCount', visitCount);
-            document.getElementById('visit-counter').textContent = : ${visitCount};
+            document.getElementById('visit-counter').textContent = `Number of Visits: ${visitCount}`;
 
             envelope.addEventListener("click", toggleEnvelope);
             btn_open.addEventListener("click", toggleEnvelope);
@@ -146,8 +153,9 @@
                         confettiNumber: 200,
                     });
 
-                    // Start falling tulips
+                    // Start falling tulips and hearts
                     tulipInterval = setInterval(createTulip, 300);
+                    heartInterval = setInterval(createHeart, 500);
 
                     isOpen = true;
                 } else {
@@ -163,6 +171,7 @@
                     envelope.classList.add("close");
                     heading.style.display = "none";
                     clearInterval(tulipInterval);
+                    clearInterval(heartInterval);  // Stop heart animation
                     isOpen = false;
                 }
             }
@@ -172,11 +181,24 @@
                 tulip.classList.add('tulip');
                 tulip.style.left = Math.random() * 100 + 'vw';
                 tulip.style.animationDuration = Math.random() * 3 + 2 + 's';
-                tulip.style.width = tulip.style.height = ${Math.random() * 20 + 30}px;  // Random tulip size
+                tulip.style.width = tulip.style.height = `${Math.random() * 20 + 30}px`;  // Random tulip size
 
                 document.getElementById('tulip-container').appendChild(tulip);
 
                 setTimeout(() => tulip.remove(), 5000);
+            }
+
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = '💕';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heart.style.fontSize = `${Math.random() * 10 + 20}px`; // Random heart size
+
+                document.getElementById('heart-container').appendChild(heart);
+
+                setTimeout(() => heart.remove(), 5000);
             }
         });
     </script>
