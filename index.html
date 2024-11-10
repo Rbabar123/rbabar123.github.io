@@ -37,16 +37,16 @@
     </body>
 </html> -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>For my babi nics</title>
+    <title>For my babi nics.</title>
     <link href="index.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <style>
-        /* Styles for the tulip animation */
+        /* Add styles for the tulip animation */
         #tulip-container {
             position: absolute;
             top: 0;
@@ -60,7 +60,7 @@
 
         .tulip {
             position: absolute;
-            width: 40px;
+            width: 40px; /* Adjusted size */
             height: 40px;
             background-image: url('tulip.png');
             background-size: cover;
@@ -81,8 +81,8 @@
 </head>
 <body>
     <div id="visit-counter"></div>
-    <!-- Container for falling hearts -->
-    <div id="heart-container"></div>
+<!-- Container for falling hearts -->
+<div id="heart-container"></div>
 
     <h1 class="valentine">I love you always in all ways.😍🌷!</h1>
     <div class="envelope-wrapper">
@@ -125,7 +125,7 @@
             let visitCount = localStorage.getItem('visitCount') || 0;
             visitCount++;
             localStorage.setItem('visitCount', visitCount);
-            document.getElementById('visit-counter').textContent = `: ${visitCount}`;
+            document.getElementById('visit-counter').textContent = : ${visitCount};
 
             envelope.addEventListener("click", toggleEnvelope);
             btn_open.addEventListener("click", toggleEnvelope);
@@ -172,7 +172,7 @@
                 tulip.classList.add('tulip');
                 tulip.style.left = Math.random() * 100 + 'vw';
                 tulip.style.animationDuration = Math.random() * 3 + 2 + 's';
-                tulip.style.width = tulip.style.height = `${Math.random() * 20 + 30}px`;
+                tulip.style.width = tulip.style.height = ${Math.random() * 20 + 30}px;  // Random tulip size
 
                 document.getElementById('tulip-container').appendChild(tulip);
 
