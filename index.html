@@ -139,7 +139,7 @@
 						<div class="menu__subheader">Click any tags</div>
 						<form>
 							<div class="form-option form-option--select">
-								<label class="song-list-label"> Add A Song </label>
+								<label class="song-list-label"> Song List </label>
 								<select class="song-list">
 									<option value="beauty">Beauty and a Beast</option>
 									<option value="lilboo"> Lil Boo Thang</option>
@@ -221,6 +221,13 @@
 		<script src="./js/script.js"></script>
 		<script src="./js/songs.js"></script>
 		<script>
+			// Ensure the audio context is resumed properly
+			document.addEventListener('click', () => {
+				if (soundManager.ctx.state === 'suspended') {
+					soundManager.ctx.resume();
+				}
+			});
+
 			function updateCountdown() {
 				const liveDate = new Date('2025-01-01T00:00:00').getTime();
 				const now = new Date().getTime();
