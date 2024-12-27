@@ -14,6 +14,20 @@
 		<meta name="msapplication-TileImage" content="./images/favicon.png" />
 		<link href="./fonts/css.css" rel="stylesheet" />
 		<link rel="stylesheet" href="./css/style.css" />
+		<style>
+			.live-date {
+				position: absolute;
+				top: 10px;
+				left: 50%;
+				transform: translateX(-50%);
+				background-color: rgba(0, 0, 0, 0.7);
+				color: white;
+				padding: 10px 20px;
+				border-radius: 5px;
+				font-size: 1.2em;
+				z-index: 1000;
+			}
+		</style>
 	</head>
 	<body>
 		<!-- partial:index.partial.html -->
@@ -150,6 +164,7 @@
 					<button type="button" class="help-modal__close-btn">Close</button>
 				</div>
 			</div>
+			<div class="live-date"></div>
 		</div>
 
 		<!-- partial -->
@@ -158,5 +173,26 @@
 		<script src="./js/MyMath.js"></script>
 		<script src="./js/script.js"></script>
 		<script src="./js/songs.js"> </script>
+		<script>
+			function updateCountdown() {
+				const liveDate = new Date('2025-01-01T00:00:00').getTime();
+				const now = new Date().getTime();
+				const distance = liveDate - now;
+
+				const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				document.querySelector('.live-date').textContent = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+				if (distance < 0) {
+					clearInterval(countdownInterval);
+					document.querySelector('.live-date').textContent = 'Event Started';
+				}
+			}
+
+			const countdownInterval = setInterval(updateCountdown, 1000);
+		</script>
 	</body>
 </html>
