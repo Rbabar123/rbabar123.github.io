@@ -16,7 +16,7 @@
 		<link rel="stylesheet" href="./css/style.css" />
 		<style>
 			.live-date {
-				position: absolute;
+				position: absolute; /* Change to absolute to allow movement */
 				top: 10px;
 				left: 50%;
 				transform: translateX(-50%);
@@ -26,6 +26,54 @@
 				border-radius: 5px;
 				font-size: 1.2em;
 				z-index: 1000;
+				animation: beat 1s infinite, colorChange 4s infinite;
+				cursor: move; /* Change cursor to indicate moveable element */
+			}
+
+			.settings-btn svg {
+				width: 40px;
+				height: 40px;
+				animation: fireworks 1s infinite;
+			}
+
+			@keyframes fireworks {
+				0% { fill: red; transform: scale(1); }
+				25% { fill: green; transform: scale(1.2); }
+				50% { fill: blue; transform: scale(1); }
+				75% { fill: yellow; transform: scale(1.2); }
+				100% { fill: red; transform: scale(1); }
+			}
+
+			@keyframes beat {
+				0%, 100% { transform: scale(1); }
+				50% { transform: scale(1.1); }
+			}
+
+			@keyframes colorChange {
+				0% { color: red; }
+				25% { color: green; }
+				50% { color: blue; }
+				75% { color: yellow; }
+				100% { color: red; }
+			}
+
+			.close-settings-btn svg {
+				width: 60px; /* Increase size */
+				height: 60px; /* Increase size */
+				animation: spark 1s infinite, colorChange 2s infinite; /* Add sparking and color change animation */
+			}
+
+			@keyframes spark {
+				0%, 100% { fill: white; }
+				50% { fill: yellow; }
+			}
+
+			@keyframes colorChange {
+				0% { fill: red; }
+				25% { fill: green; }
+				50% { fill: blue; }
+				75% { fill: purple; }
+				100% { fill: red; }
 			}
 		</style>
 	</head>
@@ -71,11 +119,12 @@
 							<use href="#icon-pause" xlink:href="#icon-pause"></use>
 						</svg>
 					</div>
-					<div class="btn sound-btn">
+					<!-- Remove the sound button -->
+					<!-- <div class="btn sound-btn">
 						<svg fill="white" width="24" height="24">
 							<use href="#icon-sound-off" xlink:href="#icon-sound-off"></use>
 						</svg>
-					</div>
+					</div> -->
 					<div class="btn settings-btn">
 						<svg fill="white" width="24" height="24">
 							<use href="#icon-settings" xlink:href="#icon-settings"></use>
@@ -89,15 +138,20 @@
 								<use href="#icon-close" xlink:href="#icon-close"></use>
 							</svg>
 						</div>
+						<div class="btn close-settings-btn">
+							<svg fill="white" width="24" height="24">
+								<use href="#icon-close" xlink:href="#icon-close"></use>
+							</svg>
+						</div>
 						<div class="menu__header">Settings</div>
 						<div class="menu__subheader">Click any tags</div>
 						<form>
 							<div class="form-option form-option--select">
 								<label class="song-list-label"> Song List </label>
 								<select class="song-list">
-									<option value="song1">Song 1</option>
-
-									<option value="yungkai">Blue by Yung Kai</option>
+									<option value="beauty">Beauty and a Beast</option>
+									<option value="lilboo"> Lil Boo Thang</option>
+									<option value="yungkai" selected>Blue by Yung Kai</option> <!-- Set default selection -->
 								</select>
 							</div>
 							<div class="form-option form-option--select">
@@ -193,6 +247,38 @@
 			}
 
 			const countdownInterval = setInterval(updateCountdown, 1000);
+
+			// Make the countdown moveable
+			const liveDateElement = document.querySelector('.live-date');
+			let isDragging = false;
+			let offsetX, offsetY;
+
+			liveDateElement.addEventListener('mousedown', (e) => {
+				isDragging = true;
+				offsetX = e.clientX - liveDateElement.getBoundingClientRect().left;
+				offsetY = e.clientY - liveDateElement.getBoundingClientRect().top;
+			});
+
+			document.addEventListener('mousemove', (e) => {
+				if (isDragging) {
+					liveDateElement.style.left = `${e.clientX - offsetX}px`;
+					liveDateElement.style.top = `${e.clientY - offsetY}px`;
+				}
+			});
+
+			document.addEventListener('mouseup', () => {
+				isDragging = false;
+			});
+
+			document.querySelector('.settings-btn').addEventListener('click', (e) => {
+				e.stopPropagation(); // Prevent the click event from propagating and pausing the program
+				document.querySelector('.menu').classList.toggle('hide');
+			});
+
+			document.querySelector('.close-settings-btn').addEventListener('click', (e) => {
+				e.stopPropagation(); // Prevent the click event from propagating and pausing the program
+				document.querySelector('.menu').classList.add('hide');
+			});
 		</script>
 	</body>
 </html>
