@@ -16,32 +16,27 @@
 		<link rel="stylesheet" href="./css/style.css" />
 		<style>
 			.live-date {
-				position: absolute; /* Change to absolute to allow movement */
+				position: fixed;
 				top: 10px;
 				left: 50%;
 				transform: translateX(-50%);
 				background-color: rgba(0, 0, 0, 0.7);
 				color: white;
 				padding: 10px 20px;
-				border-radius: 5px;
+				border-radius: 50px;
 				font-size: 1.2em;
 				z-index: 1000;
-				animation: beat 1s infinite, colorChange 4s infinite;
-				cursor: move; /* Change cursor to indicate moveable element */
+				white-space: nowrap; /* Ensure text is on one line */
+				animation: moveLeft 20s linear infinite, beat 1s infinite, colorChange 1s infinite;
 			}
 
-			.settings-btn svg {
-				width: 40px;
-				height: 40px;
-				animation: fireworks 1s infinite;
-			}
-
-			@keyframes fireworks {
-				0% { fill: red; transform: scale(1); }
-				25% { fill: green; transform: scale(1.2); }
-				50% { fill: blue; transform: scale(1); }
-				75% { fill: yellow; transform: scale(1.2); }
-				100% { fill: red; transform: scale(1); }
+			@keyframes moveLeft {
+				0% {
+					left: 100%;
+				}
+				100% {
+					left: -100%;
+				}
 			}
 
 			@keyframes beat {
@@ -57,23 +52,26 @@
 				100% { color: red; }
 			}
 
-			.close-settings-btn svg {
-				width: 60px; /* Increase size */
-				height: 60px; /* Increase size */
-				animation: spark 1s infinite, colorChange 2s infinite; /* Add sparking and color change animation */
-			}
-
-			@keyframes spark {
-				0%, 100% { fill: white; }
-				50% { fill: yellow; }
-			}
-
-			@keyframes colorChange {
-				0% { fill: red; }
-				25% { fill: green; }
-				50% { fill: blue; }
-				75% { fill: purple; }
-				100% { fill: red; }
+			@media (max-width: 640px) {
+				.controls .btn {
+					width: 30px;
+					height: 30px;
+				}
+				.menu__inner-wrap {
+					padding: 10px;
+				}
+				.menu__header {
+					font-size: 1.2em;
+				}
+				.menu__subheader {
+					font-size: 1em;
+				}
+				.form-option label {
+					font-size: 0.9em;
+				}
+				.form-option select, .form-option input {
+					font-size: 0.9em;
+				}
 			}
 		</style>
 	</head>
@@ -119,12 +117,11 @@
 							<use href="#icon-pause" xlink:href="#icon-pause"></use>
 						</svg>
 					</div>
-					<!-- Remove the sound button -->
-					<!-- <div class="btn sound-btn">
+					<div class="btn sound-btn">
 						<svg fill="white" width="24" height="24">
 							<use href="#icon-sound-off" xlink:href="#icon-sound-off"></use>
 						</svg>
-					</div> -->
+					</div>
 					<div class="btn settings-btn">
 						<svg fill="white" width="24" height="24">
 							<use href="#icon-settings" xlink:href="#icon-settings"></use>
@@ -138,11 +135,6 @@
 								<use href="#icon-close" xlink:href="#icon-close"></use>
 							</svg>
 						</div>
-						<div class="btn close-settings-btn">
-							<svg fill="white" width="24" height="24">
-								<use href="#icon-close" xlink:href="#icon-close"></use>
-							</svg>
-						</div>
 						<div class="menu__header">Settings</div>
 						<div class="menu__subheader">Click any tags</div>
 						<form>
@@ -150,16 +142,17 @@
 								<label class="song-list-label"> Song List </label>
 								<select class="song-list">
 									<option value="beauty">Beauty and a Beast</option>
-									<option value="lilboo" selected> Lil Boo Thang</option> <!-- Set default selection -->
+									<option value="lilboo"> Lil Boo Thang</option>
+
 									<option value="yungkai">Blue by Yung Kai</option>
 								</select>
 							</div>
 							<div class="form-option form-option--select">
-								<label class="shell-type-label"> Firework type</label>
+								<label class="shell-type-label"> Firework Type </label>
 								<select class="shell-type"></select>
 							</div>
 							<div class="form-option form-option--select">
-								<label class="shell-size-label"> Firework size </label>
+								<label class="shell-size-label"> Firework Size </label>
 								<select class="shell-size"></select>
 							</div>
 							<div class="form-option form-option--select">
@@ -167,7 +160,7 @@
 								<select class="quality-ui"></select>
 							</div>
 							<div class="form-option form-option--select">
-								<label class="sky-lighting-label"> Light up the sky </label>
+								<label class="sky-lighting-label"> Light up the Sky </label>
 								<select class="sky-lighting"></select>
 							</div>
 							<div class="form-option form-option--select">
@@ -175,27 +168,27 @@
 								<select class="scaleFactor"></select>
 							</div>
 							<div class="form-option form-option--checkbox">
-								<label class="word-shell-label"> Text Fireworks</label>
+								<label class="word-shell-label"> Text Fireworks </label>
 								<input class="word-shell" type="checkbox" />
 							</div>
 							<div class="form-option form-option--checkbox">
-								<label class="auto-launch-label"> Auto Fireworks</label>
+								<label class="auto-launch-label"> Auto Fireworks </label>
 								<input class="auto-launch" type="checkbox" />
 							</div>
 							<div class="form-option form-option--checkbox form-option--finale-mode">
-								<label class="finale-mode-label"> Launch more fireworks at once </label>
+								<label class="finale-mode-label"> Launch More Fireworks at Once </label>
 								<input class="finale-mode" type="checkbox" />
 							</div>
 							<div class="form-option form-option--checkbox">
-								<label class="hide-controls-label"> Hide control buttons</label>
+								<label class="hide-controls-label"> Hide Control Buttons </label>
 								<input class="hide-controls" type="checkbox" />
 							</div>
 							<div class="form-option form-option--checkbox form-option--fullscreen">
-								<label class="fullscreen-label"> Full screen </label>
+								<label class="fullscreen-label"> Full Screen </label>
 								<input class="fullscreen" type="checkbox" />
 							</div>
 							<div class="form-option form-option--checkbox">
-								<label class="long-exposure-label"> Keep firework sparks </label>
+								<label class="long-exposure-label"> Keep Firework Sparks </label>
 								<input class="long-exposure" type="checkbox" />
 							</div>
 						</form>
@@ -203,7 +196,7 @@
 							<p class="copyright">
 								<script>
 									var mydate = new Date();
-									
+									document.write(mydate.getFullYear());
 								</script>
 							</p>
 						</div>
@@ -247,38 +240,6 @@
 			}
 
 			const countdownInterval = setInterval(updateCountdown, 1000);
-
-			// Make the countdown moveable
-			const liveDateElement = document.querySelector('.live-date');
-			let isDragging = false;
-			let offsetX, offsetY;
-
-			liveDateElement.addEventListener('mousedown', (e) => {
-				isDragging = true;
-				offsetX = e.clientX - liveDateElement.getBoundingClientRect().left;
-				offsetY = e.clientY - liveDateElement.getBoundingClientRect().top;
-			});
-
-			document.addEventListener('mousemove', (e) => {
-				if (isDragging) {
-					liveDateElement.style.left = `${e.clientX - offsetX}px`;
-					liveDateElement.style.top = `${e.clientY - offsetY}px`;
-				}
-			});
-
-			document.addEventListener('mouseup', () => {
-				isDragging = false;
-			});
-
-			document.querySelector('.settings-btn').addEventListener('click', (e) => {
-				e.stopPropagation(); // Prevent the click event from propagating and pausing the program
-				document.querySelector('.menu').classList.toggle('hide');
-			});
-
-			document.querySelector('.close-settings-btn').addEventListener('click', (e) => {
-				e.stopPropagation(); // Prevent the click event from propagating and pausing the program
-				document.querySelector('.menu').classList.add('hide');
-			});
 		</script>
 	</body>
 </html>
