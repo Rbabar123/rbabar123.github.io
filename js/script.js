@@ -314,48 +314,48 @@ const scaleFactorSelector = () => store.state.config.scaleFactor;
 // Help Content
 const helpContent = {
 	shellType: {
-		header: "烟花类型",
-		body: "你要放的烟花的类型，选择“随机（Random）”可以获得非常好的体验！",
+		header: "Fireworks types",
+		body: "The type of fireworks you want to launch, choose 'Random' for a very good experience！",
 	},
 	shellSize: {
-		header: "烟花大小",
-		body: "烟花越大绽放范围就越大，但是烟花越大，设备所需的性能也会增多，大的烟花可能导致你的设备卡顿。",
+		header: "Fireworks size",
+		body: "The larger the fireworks, the bigger the display range.",
 	},
 	quality: {
-		header: "画质",
-		body: "如果动画运行不流畅，你可以试试降低画质。画质越高，烟花绽放后的火花数量就越多，但高画质可能导致你的设备卡顿。",
+		header: "Image Quality",
+		body: "If the animation runs smoothly, you can try lowering the image quality.",
 	},
 	skyLighting: {
-		header: "照亮天空",
-		body: "烟花爆炸时，背景会被照亮。如果你的屏幕看起来太亮了，可以把它改成“暗”或者“不”。",
+		header: "Illuminate the Sky",
+		body: "When the fireworks explode, the background will be illuminated. If your screen looks too bright, you can change it to 'Dark' or 'Off'.",
 	},
 	scaleFactor: {
-		header: "缩放",
-		body: "使你与烟花离得更近或更远。对于较大的烟花，你可以选择更小的缩放值，尤其是在手机或平板电脑上。",
+		header: "Zoom",
+		body: "Brings you closer to or farther from the fireworks. For larger fireworks, you can choose a smaller zoom value, especially on mobile phones or tablets.",
 	},
 	wordShell: {
-		header: "文字烟花",
-		body: "开启后，会出现烟花形状的文字。例如：新年快乐、心想事成等等",
+		header: "Text Fireworks",
+		body: "When enabled, text in the shape of fireworks will appear. ",
 	},
 	autoLaunch: {
-		header: "自动放烟花",
-		body: "开启后你就可以坐在你的设备屏幕前面欣赏烟花了，你也可以关闭它，但关闭后你就只能通过点击屏幕的方式来放烟花。",
+		header: "Auto Fireworks",
+		body: "When enabled, you can sit in front of your device screen and enjoy the fireworks. You can also turn it off, but if you do, you'll only be able to launch fireworks by clicking on the screen.",
 	},
 	finaleMode: {
-		header: "同时放更多的烟花",
-		body: "可以在同一时间自动放出更多的烟花（但需要开启先开启“自动放烟花”）。",
+		header: "Launch More Fireworks at the Same Time",
+		body: "You can automatically launch more fireworks at the same time (but you need to first enable 'Auto Fireworks')",
 	},
 	hideControls: {
-		header: "隐藏控制按钮",
-		body: "隐藏屏幕顶部的按钮。如果你要截图，或者需要一个无缝的体验，你就可以将按钮隐藏，隐藏按钮后你仍然可以在右上角打开设置。",
+		header: "Hide Control Buttons",
+		body: "Hide the buttons at the top of the screen. If you want to take a screenshot or need a seamless experience, you can hide the buttons. ",
 	},
 	fullscreen: {
-		header: "全屏",
-		body: "切换至全屏模式",
+		header: "Full Screen",
+		body: "Switch to full-screen mode",
 	},
 	longExposure: {
-		header: "保留烟花的火花",
-		body: "可以保留烟花留下的火花",
+		header: "Keep Fireworks Sparks",
+		body: "You can keep the sparks left by the fireworks.",
 	},
 };
 
