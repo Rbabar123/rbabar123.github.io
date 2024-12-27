@@ -4,9 +4,9 @@ const songs = {
 	beauty: 'audio/beauty.mp3'
 };
 
-let currentSongIndex = 0;
+let currentSongIndex = 1; // Set default song index to "Lil Boo Thang"
 const songKeys = Object.keys(songs);
-const audio = new Audio(songs.yungkai); // Set default song to "Blue by Yung Kai"
+const audio = new Audio(songs.lilboo); // Set default song to "Lil Boo Thang"
 audio.play(); // Autoplay the default song
 
 document.querySelector('.song-list').addEventListener('change', function(event) {
