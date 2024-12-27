@@ -843,15 +843,15 @@ function init() {
 	appNodes.shellSize.innerHTML = options;
 
 	setOptionsForSelect(appNodes.quality, [
-		{ label: "低", value: QUALITY_LOW },
-		{ label: "正常", value: QUALITY_NORMAL },
-		{ label: "高", value: QUALITY_HIGH },
+		{ label: "low", value: QUALITY_LOW },
+		{ label: "Normal", value: QUALITY_NORMAL },
+		{ label: "High", value: QUALITY_HIGH },
 	]);
 
 	setOptionsForSelect(appNodes.skyLighting, [
-		{ label: "不", value: SKY_LIGHT_NONE },
-		{ label: "暗", value: SKY_LIGHT_DIM },
-		{ label: "正常", value: SKY_LIGHT_NORMAL },
+		{ label: "None", value: SKY_LIGHT_NONE },
+		{ label: "Dim", value: SKY_LIGHT_DIM },
+		{ label: "Normal", value: SKY_LIGHT_NORMAL },
 	]);
 
 	// 0.9 is mobile default
