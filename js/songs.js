@@ -1,10 +1,10 @@
 const songs = {
-	lilboo: 'audio/lilBoo.mp3',
 	yungkai: 'audio/yungkai.mp3',
+	lilboo: 'audio/lilBoo.mp3',
 	beauty: 'audio/beauty.mp3'
 };
 
-let currentSongIndex = 1; // Set default song index to "Lil Boo Thang"
+let currentSongIndex = 0; // Set default song index to "Lil Boo Thang"
 const songKeys = Object.keys(songs);
 const audio = new Audio(songs.yungkai); // Set default song to "Lil Boo Thang"
 
