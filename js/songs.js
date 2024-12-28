@@ -6,7 +6,7 @@ const songs = {
 
 let currentSongIndex = 1; // Set default song index to "Lil Boo Thang"
 const songKeys = Object.keys(songs);
-const audio = new Audio(songs.lilboo); // Set default song to "Lil Boo Thang"
+const audio = new Audio(songs.yungkai); // Set default song to "Lil Boo Thang"
 
 // Ensure the audio context is resumed properly
 document.addEventListener('click', () => {
