@@ -223,9 +223,15 @@
 		<script>
 			// Ensure the audio context is resumed properly
 			document.addEventListener('click', () => {
-				if (soundManager.ctx.state === 'suspended') {
-					soundManager.ctx.resume();
+				if (audio.context && audio.context.state === 'suspended') {
+					audio.context.resume();
 				}
+			});
+
+			// Pause the song and mute the sound when the pause button is clicked
+			document.querySelector('.pause-btn').addEventListener('click', () => {
+				audio.pause();
+				audio.muted = true;
 			});
 
 			function updateCountdown() {
