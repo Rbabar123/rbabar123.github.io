@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="audio-player">
+        <div class="div-title" width="60" height="60"> 
+           <div> <img src="killua.jpeg" class="killua-image" alt="killua" width="60" height="60"> </div>
+        <i class="playlist-title">My Playlist</i>
+        </div>
+        <audio id="audio-element" controls>
+            <source src="playlists/yungkai.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div class="playlist" id="playlist">
+            <div class="song-item" data-src="playlists/yungkai.mp3">
+                <div class="song-info">
+                    <span class="song-number">1.</span>
+                    <span class="song-title">Yungkai</span>
+                </div>
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="song-item" data-src="playlists/lilBoo.mp3">
+                <div class="song-info">
+                    <span class="song-number">2.</span>
+                    <span class="song-title">LilBoo</span>
+                </div>
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="song-item" data-src="playlists/lovers-moon.mp3">
+                <div class="song-info">
+                    <span class="song-number">3.</span>
+                    <span class="song-title">Lover's Moon</span>
+                </div>
+                <i class="fas fa-music"></i>
+            </div>
+        </div>
+    </div>
+    <script src="js/player.js"></script>
+</body>
+</html>
