@@ -6,7 +6,7 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const genAI = new GoogleGenerativeAI("AIzaSyDk6hp-tw2ir5RH6Gb5MEoEAe9C1_VbLjo"); // Replace with your actual API key
+const genAI = new GoogleGenerativeAI("AIzaSyB2Eu7oiy1O4VzMsz5q0TmIWAQiEu7HNQ4"); // Replace with your actual API key
 
 async function askGemini(question) {
     try {
