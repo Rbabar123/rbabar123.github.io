@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot with Gemini AI</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        #chatbox { width: 100%; max-width: 500px; margin: auto; padding: 10px; border: 1px solid #ccc; height: 300px; overflow-y: auto; }
+        #userInput { width: 80%; padding: 8px; }
+        button { padding: 8px 15px; }
+    </style>
+</head>
+<body>
+
+    <h1 style="color: maroon;">Chat with Gemini AI</h1>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        async function sendMessage() {
+            const inputField = document.getElementById("userInput");
+            const chatbox = document.getElementById("chatbox");
+            const userMessage = inputField.value;
+            
+            if (!userMessage) return;
+
+            // Display user message
+            chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+            inputField.value = "";
+
+            // Send message to server
+            try {
+                const response = await fetch("http://localhost:3000/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                const data = await response.json();
+                chatbox.innerHTML += `<p><strong>Gemini AI:</strong> ${data.reply}</p>`;
+                chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll
+            } catch (error) {
+                console.error("Error:", error);
+                chatbox.innerHTML += `<p><strong>Error:</strong> Couldn't connect to AI.</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
