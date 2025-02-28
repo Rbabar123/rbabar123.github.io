@@ -10,8 +10,11 @@ const port = 3000; // You can change this if needed
 app.use(cors());
 app.use(bodyParser.json());
 
-// Initialize Google Gemini AI
-const genAI = new GoogleGenerativeAI("AIzaSyDk6hp-AIzaSyB2Eu7oiy1O4VzMsz5q0TmIWAQiEu7HNQ4");
+/* 
+    const genAI = new GoogleGenerativeAI(process.env.GENERATIVE_AI_KEY);
+  Then, set the environment variable GENERATIVE_AI_KEY in your deployment settings.
+*/
+const genAI = new GoogleGenerativeAI("AIzaSyB2Eu7oiy1O4VzMsz5q0TmIWAQiEu7HNQ4"); // <-- Insert your API key here
 
 // API endpoint to handle chatbot messages
 app.post("/chat", async (req, res) => {
