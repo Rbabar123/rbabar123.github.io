@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grade 11 Research Survey</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Grade 11 Research Survey</h2>
+    <form id="survey-form" onsubmit="showGreetingPopup(event)">
+      <label>
+        Full Name:
+        <input type="text" name="name" required />
+      </label>
+
+      <label>
+        Email Address:
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        Age:
+        <input type="text" name="age" required />
+      </label>
+
+      <label>
+        Gender:
+        <select name="gender" required>
+          <option value="" disabled selected>Select your gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+      </label>
+
+      <label>
+        Strand:
+        <select id="strand" name="strand" required onchange="updateSectionOptions()">
+          <option value="" disabled selected>Select your strand</option>
+          <option value="ICT">ICT</option>
+          <option value="HE">HE</option>
+          <option value="ABM">ABM</option>
+        </select>
+      </label>
+
+      <label>
+        Section:
+        <select id="section" name="section" required>
+          <option value="" disabled selected>Select your section</option>
+        </select>
+      </label>
+
+      <label>
+        How often do you use online educational resources?
+        <select name="usage_frequency" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+          <option value="Rarely">Rarely</option>
+          <option value="Never">Never</option>
+        </select>
+      </label>
+
+      <label>
+        <span>What challenges do you face when using online educational platforms?</span>
+        <textarea name="challenges" id="challenges" onblur="autoSave('challenges')" onfocus="showTooltip('challenges')" required></textarea>
+        <div id="tooltip-challenges" class="tooltip">Please describe any difficulties you encounter while using online platforms, such as connectivity issues, lack of resources, or navigation difficulties.</div>
+      </label>
+
+      <label>
+        <span>Suggestions to improve online learning experiences:</span>
+        <textarea name="suggestions" id="suggestions" onblur="autoSave('suggestions')" onfocus="showTooltip('suggestions')" required></textarea>
+        <div id="tooltip-suggestions" class="tooltip">Share your ideas on how we can enhance the learning experience online, such as better interface design, improved content delivery, or more interactive features.</div>
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
