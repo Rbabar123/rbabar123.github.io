@@ -14,8 +14,8 @@ function updateSectionOptions() {
 
   const sections = {
     ICT: ["ICT 11-1", "ICT 11-2", "ICT 11-3", "ICT 11-4", "ICT 11-5", "ICT 11-6", "ICT 11-7", "ICT 11-8", "ICT 11-9"],
-    HE:  ["HE 11-1", "HE 11-2", "HE 11-3", "HE 11-4", "HE 11-5"],
-    ABM: ["ABM 11-1", "ABM 11-2", "ABM 11-3", "ABM 11-4"]
+    HE:  ["HE 11-1", "HE 11-2", "HE 11-3", "HE 11-4", "HE 11-5", "HE 11-6", "HE 11-7", "HE 11-8", "HE 119"],
+    ABM: ["ABM 11-1", "ABM 11-2", "ABM 11-3", "ABM 11-4", "ABM 11-5", "ABM 11-6", "1BM 11-7", "ABM 11-8", "ABM 11-9"]
   };
 
   sectionSelect.innerHTML = '<option value="" disabled selected>Select your section</option>';
