@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple transition for the button */
+        .btn-submit {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+        /* Fade-in animation for the main container */
+        .fade-in {
+            animation: fadeInAnimation 1s ease-in forwards;
+        }
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-md mx-auto p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl text-center fade-in">
+        
+        <!-- Header Section -->
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">A Special Message Awaits</h1>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">Thank you for visiting. There's a personal message waiting, but first, a question for you.</p>
+
+        <!-- Input Form -->
+        <div id="birthday-form">
+            <label for="birthday-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">When is the celebrant's complete birthday?</label>
+            <input type="text" id="birthday-input" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-center text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="MM/DD/YYYY">
+            
+            <!-- Error Message Placeholder -->
+            <p id="error-message" class="text-red-500 text-sm mt-2 h-5"></p>
+            
+            <button id="submit-button" class="btn-submit w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md">
+                Enter
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- JavaScript Logic ---
+
+        // 1. Get references to the HTML elements we need to work with.
+        const birthdayInput = document.getElementById('birthday-input');
+        const submitButton = document.getElementById('submit-button');
+        const errorMessage = document.getElementById('error-message');
+
+        // 2. !!! IMPORTANT: SET THE CORRECT BIRTHDAY HERE !!!
+        // Change the date inside the quotes to your Tito Mar's birthday.
+        // The format MUST be MM/DD/YYYY (e.g., "06/21/1970").
+        const correctBirthday = "06/21/1990"; 
+
+        // 3. Define the function that will check the birthday.
+        function checkBirthday() {
+            // Get the value from the input field and remove any extra spaces.
+            const userInput = birthdayInput.value.trim();
+
+            // Check if the user's input matches the correct birthday.
+            if (userInput === correctBirthday) {
+                // If it's correct, show a success message and redirect.
+                errorMessage.textContent = "That's correct! Redirecting...";
+                errorMessage.classList.remove('text-red-500');
+                errorMessage.classList.add('text-green-500');
+
+                // Wait a moment before redirecting so the user sees the message.
+                setTimeout(() => {
+                    // This is the URL for the personal greeting page.
+                    window.location.href = "https://rbabar123.github.io/Birthday/index.html";
+                }, 1000); // 1-second delay
+
+            } else {
+                // If it's incorrect, show an error message.
+                errorMessage.textContent = "Sorry, that's not the correct date. Please try again.";
+                errorMessage.classList.add('text-red-500');
+                errorMessage.classList.remove('text-green-500');
+                
+                // Clear the input field for the user to try again.
+                birthdayInput.value = "";
+            }
+        }
+
+        // 4. Add event listeners to run the check.
+        
+        // When the "Enter" button is clicked.
+        submitButton.addEventListener('click', checkBirthday);
+
+        // Also, when the user presses the "Enter" key in the input field.
+        birthdayInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                checkBirthday();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
+
