@@ -1,0 +1,142 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Layout */
+.layout-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Container */
+.calculator-container {
+  width: 95%;
+  max-width: 400px;
+}
+
+/* Calculator UI */
+.calculator {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
+.display {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: right;
+  margin-bottom: 1rem;
+  min-height: 4.5rem;
+  overflow-wrap: break-word;
+}
+
+#expression {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+#result {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+}
+
+button {
+  padding: 1rem;
+  border: none;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* History Panel */
+#history-wrapper.hidden {
+  display: none;
+}
+
+.history-panel {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: white;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+.history-entry {
+  margin-bottom: 0.5rem;
+  padding: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Toggle Button */
+.toggle-btn {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .calculator {
+    padding: 1rem;
+  }
+
+  button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+}
