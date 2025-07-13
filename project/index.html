@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scientific Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator-container">
+
+   <div class="layout-wrapper">
+  <!-- Sidebar: History Toggle Button -->
+  <div class="sidebar">
+    <button id="toggle-history" class="toggle-btn">📜 History</button>
+  </div>
+
+  <!-- Main Calculator Content -->
+  <div class="calculator-container">
+    <!-- Hidden History Panel -->
+    <div id="history-wrapper" class="hidden">
+      <div class="history-panel">
+        <h3>History</h3>
+        <div id="history-list"></div>
+      </div>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator">
+      <div class="display">
+        <div id="expression"></div>
+        <div id="result">0</div>
+      </div>
+      <div class="buttons">
+        <!-- your buttons (unchanged) -->
+        <button data-action="clear">C</button>
+        <button data-action="backspace">←</button>
+        <button data-value="(">(</button>
+        <button data-value=")">)</button>
+
+        <button data-function="sin">sin</button>
+        <button data-function="cos">cos</button>
+        <button data-function="tan">tan</button>
+        <button data-operator="/">÷</button>
+
+        <button data-function="log">log</button>
+        <button data-function="ln">ln</button>
+        <button data-function="sqrt">√</button>
+        <button data-operator="*">×</button>
+
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button data-operator="-">−</button>
+
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-operator="+">+</button>
+
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-operator="^">^</button>
+
+        <button data-value="0">0</button>
+        <button data-value=".">.</button>
+        <button data-value="%">%</button>
+        <button data-action="calculate">=</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
