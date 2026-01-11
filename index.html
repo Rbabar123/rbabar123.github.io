@@ -2,111 +2,173 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love 💖</title>
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(270deg, #ff5f6d, #ffc371, #ff9a9e, #fad0c4);
-  background-size: 800% 800%;
-  animation: gradient 15s ease infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
-}
+  :root {
+    --primary-pink: #ff758c;
+    --secondary-orange: #ff7eb3;
+  }
 
-@keyframes gradient {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+  }
 
-.card {
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(12px);
-  border-radius: 25px;
-  padding: 45px;
-  text-align: center;
-  color: white;
-  box-shadow: 0 0 30px rgba(255,0,100,0.35);
-  animation: float 4s ease-in-out infinite;
-  max-width: 90%;
-}
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-@keyframes float {
-  0% {transform: translateY(0);}
-  50% {transform: translateY(-12px);}
-  100% {transform: translateY(0);}
-}
+  .card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    padding: 50px 40px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    max-width: 450px;
+    width: 85%;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease-out;
+  }
 
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 15px;
-}
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: linear-gradient(45deg, #ff758c, #ff7eb3, transparent, transparent);
+    border-radius: 32px;
+    z-index: -1;
+    opacity: 0.5;
+  }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.6;
-}
+  h1 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
 
-.heart {
-  font-size: 3.5em;
-  animation: beat 1.2s infinite;
-}
+  p {
+    font-size: 1.15em;
+    line-height: 1.8;
+    font-weight: 300;
+    opacity: 0.95;
+    margin-bottom: 20px;
+  }
 
-@keyframes beat {
-  0%,100% {transform: scale(1);}
-  50% {transform: scale(1.25);}
-}
+  .heart-main {
+    font-size: 4.5em;
+    margin-bottom: 20px;
+    display: inline-block;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    animation: pulse 1.5s ease-in-out infinite;
+  }
 
-.floating-heart {
-  position: absolute;
-  font-size: 1.3em;
-  animation: rise linear infinite;
-  opacity: 0.8;
-  pointer-events: none;
-}
+  @keyframes pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,255,255,0.4)); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(255,255,255,0.8)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,255,255,0.4)); }
+  }
 
-@keyframes rise {
-  from {transform: translateY(110vh) scale(0.5);}
-  to {transform: translateY(-10vh) scale(1.1);}
-}
+  .floating-heart {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    animation: fly linear forwards;
+    filter: blur(0.5px);
+  }
+
+  @keyframes fly {
+    0% {
+      transform: translateY(110vh) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% {
+      transform: translateY(-20vh) translateX(100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .signature {
+    margin-top: 30px;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.5);
+  }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="heart">💖</div>
+<div class="card" id="card">
+  <div class="heart-main">💖</div>
   <h1>Hey, My Love</h1>
   <p>
     Even with the distance between us, you’re the one I think of when I want to feel calm.  
-    Your messages, your presence, the way you understand me — they make the space feel smaller.
   </p>
   <p>
-    I may not be beside you, but my care for you is steady and real,  
-    and every day I choose you, no matter how far we are.
+    I may not be beside you, but my care for you is <strong>steady and real</strong>. Every day I choose you, no matter how far we are.
   </p>
-  <p><strong>I’m grateful for you, and for us.</strong></p>
+  <div class="signature">I’m grateful for you, and for us.</div>
 </div>
 
 <script>
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "floating-heart";
-  heart.textContent = "💗";
-  heart.style.left = Math.random() * 100 + "vw";
-  const duration = 6 + Math.random() * 4;
-  heart.style.animationDuration = duration + "s";
-  document.body.appendChild(heart);
+  // Create variety of floating hearts
+  const heartTypes = ['❤️', '💖', '💗', '💓', '✨'];
+  
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+    
+    const startX = Math.random() * 100;
+    const size = Math.random() * (30 - 15) + 15;
+    const duration = Math.random() * (10 - 6) + 6;
+    
+    heart.style.left = startX + "vw";
+    heart.style.fontSize = size + "px";
+    heart.style.animationDuration = duration + "s";
+    heart.style.opacity = Math.random() * 0.5 + 0.3;
+    
+    document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, duration * 1000);
-}
+    setTimeout(() => {
+      heart.remove();
+    }, duration * 1000);
+  }
 
-setInterval(createHeart, 600);
+  setInterval(createHeart, 400);
+
+  // Smooth Tilt Interaction
+  const card = document.getElementById('card');
+  document.addEventListener('mousemove', (e) => {
+    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+  });
+
+  // Reset card position on mouse leave
+  document.addEventListener('mouseleave', () => {
+    card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+  });
 </script>
 
 </body>
