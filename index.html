@@ -2,25 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Page Not Found</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <title>For You ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 2.5em;
+    }
+    p {
+      font-size: 1.2em;
+    }
+    .heart {
+      font-size: 3em;
+      animation: beat 1s infinite;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
 </head>
 <body>
-  <section class="page_404">
-    <div class="container">
-      <div class="content_box">
-        <div class="four_zero_four_bg">
-          <h1>404</h1>
-        </div>
-
-        <div class="content_text">
-          <h3>Looks like you're lost</h3>
-          <p>The page you are looking for is not available!</p>
-          <a href="/" class="link_404">Go to Home</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Hey, Love</h1>
+    <p>
+      If smiles were stars, yours would light up my entire universe.  
+      I don’t just like you… I choose you, every single day.
+    </p>
+    <p><strong>Always yours.</strong></p>
+  </div>
 </body>
 </html>
