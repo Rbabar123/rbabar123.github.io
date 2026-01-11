@@ -35,8 +35,9 @@
   #overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -45,19 +46,37 @@
     transition: opacity 1s ease;
   }
 
+  /* Loading State */
+  #loader {
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: breathe 2s infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
   #startBtn {
-    padding: 15px 40px;
+    display: none; /* Hidden until music loads */
+    padding: 18px 45px;
     font-size: 1.2em;
     background: white;
     color: #e73c7e;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    box-shadow: 0 0 25px rgba(255,255,255,0.4);
     animation: pulseBtn 2s infinite;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    transition: transform 0.3s ease;
   }
+
+  #startBtn:active { transform: scale(0.9); }
 
   @keyframes pulseBtn {
     0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
@@ -67,42 +86,35 @@
 
   .card {
     background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 30px;
     padding: 40px 30px;
     text-align: center;
     color: white;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     max-width: 400px;
     width: 85%;
     position: relative;
     z-index: 2;
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     transform-style: preserve-3d;
-    opacity: 0; /* Hidden initially */
-    transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
   }
 
   .card.show {
     opacity: 1;
-    transform: translateY(0);
-    transition: opacity 1.5s ease, transform 1s ease;
+    transform: translateY(0) scale(1);
+    transition: opacity 1.2s ease, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  @media (max-width: 480px) {
-    .card { padding: 30px 20px; width: 80%; }
-    h1 { font-size: 2em !important; }
-    p { font-size: 1.05em !important; }
-    .heart-main { font-size: 3.5em !important; }
-  }
-
-  h1 { font-size: 2.5em; margin-bottom: 15px; font-weight: 300; letter-spacing: 1px; }
-  p { font-size: 1.1em; line-height: 1.6; font-weight: 300; opacity: 0.95; margin-bottom: 15px; }
+  h1 { font-size: 2.5em; margin-bottom: 15px; font-weight: 300; }
+  p { font-size: 1.1em; line-height: 1.6; font-weight: 300; margin-bottom: 15px; }
 
   .heart-main {
-    font-size: 4em;
+    font-size: 4.5em;
     margin-bottom: 10px;
     display: inline-block;
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
@@ -110,8 +122,8 @@
   }
 
   @keyframes pulse {
-    0%, 100% { transform: scale(1) translateZ(20px); }
-    50% { transform: scale(1.1) translateZ(40px); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
   }
 
   .floating-heart {
@@ -122,16 +134,15 @@
   }
 
   @keyframes fly {
-    0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
     10% { opacity: 0.6; }
-    100% { transform: translateY(-20vh) translateX(50px) rotate(360deg); opacity: 0; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
   }
 
   .signature {
     margin-top: 25px;
     font-style: italic;
-    font-size: 1.1em;
-    opacity: 0.9;
+    opacity: 0.8;
     border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 20px;
   }
@@ -140,10 +151,11 @@
 <body>
 
 <div id="overlay">
+  <div id="loader">Preparing something special...</div>
   <button id="startBtn">Open with Love 💖</button>
 </div>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
   <source src="yungkai.mp3" type="audio/mpeg">
 </audio>
 
@@ -158,14 +170,25 @@
 <script>
   const audio = document.getElementById('bgMusic');
   const startBtn = document.getElementById('startBtn');
+  const loader = document.getElementById('loader');
   const overlay = document.getElementById('overlay');
   const card = document.getElementById('card');
 
+  // Check if audio is already loaded
+  if (audio.readyState >= 3) {
+    showButton();
+  } else {
+    // Wait for the browser to have enough data to play smoothly
+    audio.addEventListener('canplaythrough', showButton);
+  }
+
+  function showButton() {
+    loader.style.display = 'none';
+    startBtn.style.display = 'block';
+  }
+
   startBtn.addEventListener('click', () => {
-    // Play Audio
-    audio.play().catch(e => console.log("Audio play failed", e));
-    
-    // Hide Overlay and Show Card
+    audio.play();
     overlay.style.opacity = '0';
     setTimeout(() => {
       overlay.style.display = 'none';
@@ -180,38 +203,32 @@
     heart.className = "floating-heart";
     heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
     const startX = Math.random() * 100;
-    const size = Math.random() * (25 - 12) + 12;
     const duration = Math.random() * (8 - 5) + 5;
     heart.style.left = startX + "vw";
-    heart.style.fontSize = size + "px";
+    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
     heart.style.animationDuration = duration + "s";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), duration * 1000);
   }
 
   function startHearts() {
-    const heartInterval = window.innerWidth < 480 ? 800 : 400;
-    setInterval(createHeart, heartInterval);
+    setInterval(createHeart, window.innerWidth < 480 ? 700 : 400);
   }
 
-  // Tilt Effect
-  function handleMove(e) {
+  // Interaction Tilt
+  document.addEventListener('mousemove', (e) => {
     if (!card.classList.contains('show')) return;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const xAxis = (window.innerWidth / 2 - clientX) / 15;
-    const yAxis = (window.innerHeight / 2 - clientY) / 15;
+    const xAxis = (window.innerWidth / 2 - e.clientX) / 15;
+    const yAxis = (window.innerHeight / 2 - e.clientY) / 15;
     card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-  }
+  });
 
-  function resetMove() {
-    card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-  }
-
-  document.addEventListener('mousemove', handleMove);
-  document.addEventListener('mouseleave', resetMove);
-  document.addEventListener('touchmove', handleMove);
-  document.addEventListener('touchend', resetMove);
+  document.addEventListener('touchmove', (e) => {
+    if (!card.classList.contains('show')) return;
+    const xAxis = (window.innerWidth / 2 - e.touches[0].clientX) / 15;
+    const yAxis = (window.innerHeight / 2 - e.touches[0].clientY) / 15;
+    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+  });
 </script>
 
 </body>
