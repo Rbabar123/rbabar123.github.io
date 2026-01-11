@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>For My Love 💖</title>
 <style>
   :root {
@@ -12,15 +12,19 @@
 
   body {
     margin: 0;
-    height: 100vh;
+    padding: 0;
+    min-height: 100vh;
+    /* Use dvh for better mobile height handling */
+    min-height: 100dvh;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     overflow: hidden;
+    perspective: 1000px;
   }
 
   @keyframes gradientBG {
@@ -30,60 +34,61 @@
   }
 
   .card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 30px;
-    padding: 50px 40px;
+    padding: 40px 30px;
     text-align: center;
     color: white;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-    max-width: 450px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    max-width: 400px;
     width: 85%;
     position: relative;
     z-index: 2;
-    transition: transform 0.2s ease-out;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
   }
 
-  .card::before {
-    content: '';
-    position: absolute;
-    top: -2px; left: -2px; right: -2px; bottom: -2px;
-    background: linear-gradient(45deg, #ff758c, #ff7eb3, transparent, transparent);
-    border-radius: 32px;
-    z-index: -1;
-    opacity: 0.5;
+  /* Responsive Adjustments */
+  @media (max-width: 480px) {
+    .card {
+      padding: 30px 20px;
+      width: 80%;
+    }
+    h1 { font-size: 2em !important; }
+    p { font-size: 1.05em !important; }
+    .heart-main { font-size: 3.5em !important; }
   }
 
   h1 {
-    font-size: 2.8em;
-    margin-bottom: 20px;
+    font-size: 2.5em;
+    margin-bottom: 15px;
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.2);
   }
 
   p {
-    font-size: 1.15em;
-    line-height: 1.8;
+    font-size: 1.1em;
+    line-height: 1.6;
     font-weight: 300;
     opacity: 0.95;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .heart-main {
-    font-size: 4.5em;
-    margin-bottom: 20px;
+    font-size: 4em;
+    margin-bottom: 10px;
     display: inline-block;
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
     animation: pulse 1.5s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,255,255,0.4)); }
-    50% { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(255,255,255,0.8)); }
-    100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,255,255,0.4)); }
+    0%, 100% { transform: scale(1) translateZ(20px); }
+    50% { transform: scale(1.1) translateZ(40px); }
   }
 
   .floating-heart {
@@ -91,7 +96,6 @@
     pointer-events: none;
     z-index: 1;
     animation: fly linear forwards;
-    filter: blur(0.5px);
   }
 
   @keyframes fly {
@@ -99,20 +103,21 @@
       transform: translateY(110vh) translateX(0) rotate(0deg);
       opacity: 0;
     }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
     100% {
-      transform: translateY(-20vh) translateX(100px) rotate(360deg);
+      transform: translateY(-20vh) translateX(50px) rotate(360deg);
       opacity: 0;
     }
   }
 
   .signature {
-    margin-top: 30px;
+    margin-top: 25px;
     font-style: italic;
-    font-size: 1.2em;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(255,255,255,0.5);
+    font-size: 1.1em;
+    opacity: 0.9;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 20px;
   }
 </style>
 </head>
@@ -125,50 +130,58 @@
     Even with the distance between us, you’re the one I think of when I want to feel calm.  
   </p>
   <p>
-    I may not be beside you, but my care for you is <strong>steady and real</strong>. Every day I choose you, no matter how far we are.
+    I may not be beside you, but my care for you is <strong>steady and real</strong>. 
   </p>
   <div class="signature">I’m grateful for you, and for us.</div>
 </div>
 
 <script>
-  // Create variety of floating hearts
-  const heartTypes = ['❤️', '💖', '💗', '💓', '✨'];
-  
+  // Optimized heart generator
+  const heartTypes = ['❤️', '💖', '💗', '✨'];
   function createHeart() {
     const heart = document.createElement("div");
     heart.className = "floating-heart";
     heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
     
     const startX = Math.random() * 100;
-    const size = Math.random() * (30 - 15) + 15;
-    const duration = Math.random() * (10 - 6) + 6;
+    const size = Math.random() * (25 - 12) + 12;
+    const duration = Math.random() * (8 - 5) + 5;
     
     heart.style.left = startX + "vw";
     heart.style.fontSize = size + "px";
     heart.style.animationDuration = duration + "s";
-    heart.style.opacity = Math.random() * 0.5 + 0.3;
     
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, duration * 1000);
+    setTimeout(() => heart.remove(), duration * 1000);
   }
 
-  setInterval(createHeart, 400);
+  // Fewer hearts on mobile to save battery/performance
+  const heartInterval = window.innerWidth < 480 ? 800 : 400;
+  setInterval(createHeart, heartInterval);
 
-  // Smooth Tilt Interaction
+  // Responsive Tilt Effect (Desktop & Mobile)
   const card = document.getElementById('card');
-  document.addEventListener('mousemove', (e) => {
-    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+  
+  function handleMove(e) {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    const xAxis = (window.innerWidth / 2 - clientX) / 15;
+    const yAxis = (window.innerHeight / 2 - clientY) / 15;
     card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-  });
+  }
 
-  // Reset card position on mouse leave
-  document.addEventListener('mouseleave', () => {
+  function resetMove() {
     card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-  });
+  }
+
+  // Mouse events
+  document.addEventListener('mousemove', handleMove);
+  document.addEventListener('mouseleave', resetMove);
+  
+  // Touch events for Mobile
+  document.addEventListener('touchmove', handleMove);
+  document.addEventListener('touchend', resetMove);
 </script>
 
 </body>
